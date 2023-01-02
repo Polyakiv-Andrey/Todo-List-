@@ -4,6 +4,9 @@ from django.db import models
 class Tags(models.Model):
     tag = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.tag}"
+
 
 class Task(models.Model):
     content = models.TextField()
@@ -13,4 +16,4 @@ class Task(models.Model):
     tags = models.ManyToManyField(Tags)
 
     class Meta:
-        ordering = ["-completeness", "time_creation"]
+        ordering = ["completeness", "time_creation"]
