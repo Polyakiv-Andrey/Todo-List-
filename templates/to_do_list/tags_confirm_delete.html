@@ -1,0 +1,18 @@
+<{% extends 'base.html' %}>
+
+{% block content %}
+  <div style="border: red solid 5px; width: 600px; margin: 300px 0 0 300px">
+  <h1>Do you want to delete this tag?</h1>
+   <div style="display: flex; padding-left: 200px">
+   <div style="margin-right: 20px;">
+  <form action="" method="post">
+  {% csrf_token %}
+  <input class="btn btn-danger" type="submit" value="Delete">
+  </form>
+   </div>
+   <div>
+     <a class="btn btn-primary" href="{% url 'to_do_list:Tags' %}">Return Back</a>
+   </div>
+   </div>
+  </div>
+{% endblock %}
