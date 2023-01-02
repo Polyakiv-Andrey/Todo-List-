@@ -1,1 +1,65 @@
 {% extends 'base.html' %}
+
+{% block content %}
+  <h1 style="margin-top: 30px; margin-left: 500px">
+    TODO list
+    <a class="btn btn-primary" style="float: right" href="{% url 'to_do_list:create-task' %}">
+      Add task
+    </a>
+  </h1>
+  <ul style="list-style: none">
+  {% for task in task_list %}
+    <li style="background: bisque; border: aqua solid 5px; margin-bottom: 15px; padding-bottom: 30px; padding-left: 30px">
+
+    <div style="display: flex; margin-top: 30px">
+      <div>
+        <strong>{{ task.content }}</strong>
+      </div>
+      <div>
+       {% if task.completeness %}
+         <p style="color: green; margin-left: 30px">Done</p>
+       {% else %}
+          <p style="color: red; margin-left: 30px">Not done</p>
+       {% endif %}
+       </div>
+    </div>
+
+      {% if task.completeness %}
+        <a class="btn btn-info" style="float: right; margin-right: 30px" href="{% url 'to_do_list:change-task-status' pk=task.pk %}">Undo</a>
+      {% else %}
+        <a class="btn btn-success" style="float: right; margin-right: 30px" href="{% url 'to_do_list:change-task-status' pk=task.pk %}">Complete</a>
+      {% endif %}
+
+    <div>
+      <p>Tags:
+        {% for tag in task.tags.all %}
+          {{ tag }}
+        {% endfor %}
+      </p>
+    </div>
+
+    <div>
+
+      <div>
+         Creation time: {{ task.time_creation }}
+      <div>
+
+      <div>
+         Deadline: {{ task.deadline }}
+      <div>
+    <div style="display: flex">
+      <div>
+        <a class="btn btn-primary" href="{% url 'to_do_list:update-task' pk=task.pk %}">Update</a>
+      </div>
+      <div>
+        <a class="btn btn-danger" href="{% url 'to_do_list:delete-task' pk=task.pk %}">Delete</a>
+      </div>
+    </div>
+    </div>
+      </div>
+      </div>
+    </li>
+  {% endfor %}
+  </ul>
+
+{% endblock %}
