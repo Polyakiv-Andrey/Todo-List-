@@ -31,6 +31,16 @@ class DeleteTaskView(generic.DeleteView):
     success_url = reverse_lazy("to_do_list:ToDoList")
 
 
+def change_task_status(request, pk):
+    task = Task.objects.get(id=pk)
+    if task.completeness is False:
+        task.completeness = True
+    else:
+        task.completeness = False
+    task.save()
+    return HttpResponseRedirect(reverse_lazy("to_do_list:ToDoList"))
+
+
 class TagListView(generic.ListView):
     model = Tags
     template_name = "to_do_list/tags.html"
@@ -40,16 +50,18 @@ class TagListView(generic.ListView):
 class CreateTagView(generic.CreateView):
     model = Tags
     fields = "__all__"
-    success_url = reverse_lazy("to_do_list:ToDoList")
-    template_name = "to_do_list/form_task.html"
+    success_url = reverse_lazy("to_do_list:Tags")
+    template_name = "to_do_list/form_tags.html"
 
 
-def change_task_status(request, pk):
-    task = Task.objects.get(id=pk)
-    if task.completeness is False:
-        task.completeness = True
-    else:
-        task.completeness = False
-    task.save()
-    return HttpResponseRedirect(reverse_lazy("to_do_list:ToDoList"))
+class UpdateTagView(generic.UpdateView):
+    model = Tags
+    fields = "__all__"
+    success_url = reverse_lazy("to_do_list:Tags")
+    template_name = "to_do_list/form_tags.html"
+
+
+class DeleteTagView(generic.DeleteView):
+    model = Tags
+    success_url = reverse_lazy("to_do_list:Tags")
 
