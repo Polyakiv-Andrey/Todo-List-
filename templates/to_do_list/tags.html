@@ -1,1 +1,42 @@
 {% extends 'base.html' %}
+
+{% block content %}
+  <div style="margin-top: 50px; padding-left: 50px; background: whitesmoke">
+  <h1 style="padding-bottom: 30px">
+    Tags
+    <a href="{% url 'to_do_list:create-tag' %}" class="btn btn-primary" style="float: right; margin: 30px">
+      Add
+    </a>
+  </h1>
+  {% if tags_list %}
+    <table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Tag</th>
+        <th>Update</th>
+        <th>Delete</th>
+    </tr>
+  {% for tag in tags_list %}
+     <tr>
+          <td>
+              {{ tag.id }}
+          </td>
+          <td>
+              {{ tag.tag }}
+          </td>
+          <td>
+              <a href="{% url 'to_do_list:update-tag' pk=tag.id %}" class="btn btn-success">
+                Update
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'to_do_list:delete-tag' pk=tag.id %}" class="btn btn-danger">
+                Delete
+              </a>
+            </td>
+        </tr>
+  {% endfor %}
+     </table>
+  </div>
+  {% endif %}
+{% endblock %}
