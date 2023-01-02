@@ -1,7 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import generic
-from django.shortcuts import render
 
 from to_do_list.models import Task, Tags
 
@@ -64,4 +63,3 @@ class UpdateTagView(generic.UpdateView):
 class DeleteTagView(generic.DeleteView):
     model = Tags
     success_url = reverse_lazy("to_do_list:Tags")
-
