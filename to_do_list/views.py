@@ -32,10 +32,7 @@ class DeleteTaskView(generic.DeleteView):
 
 def change_task_status(request, pk):
     task = Task.objects.get(id=pk)
-    if task.completeness is False:
-        task.completeness = True
-    else:
-        task.completeness = False
+    task.completeness = False if task.completeness else True
     task.save()
     return HttpResponseRedirect(reverse_lazy("to_do_list:ToDoList"))
 
