@@ -12,8 +12,8 @@ class Task(models.Model):
     content = models.TextField()
     time_creation = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(blank=True, null=True)
-    completeness = models.BooleanField(default=False)
+    status = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tags)
 
     class Meta:
-        ordering = ["completeness", "time_creation"]
+        ordering = ["status", "time_creation"]

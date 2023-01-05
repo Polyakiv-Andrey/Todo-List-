@@ -24,7 +24,7 @@
        </div>
     </div>
 
-      {% if task.completeness %}
+      {% if task.status %}
         <a class="btn btn-info" style="float: right; margin-right: 30px" href="{% url 'to_do_list:change-task-status' pk=task.pk %}">Undo</a>
       {% else %}
         <a class="btn btn-success" style="float: right; margin-right: 30px" href="{% url 'to_do_list:change-task-status' pk=task.pk %}">Complete</a>
